@@ -15,8 +15,11 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, SnowballStemmer,LancasterStemmer,WordNetLemmatizer
 from wordcloud import WordCloud
 import pickle
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
 
-data=pd.read_csv(r"C:\Users\HP\Desktop\fakenews.csv")
+data=pd.read_csv("fakenews.csv")
 fv=data.iloc[:,0]
 cv=data.iloc[:,-1]
 x_train,x_test,y_train,y_test=train_test_split(fv,cv,test_size=0.2,random_state=1,stratify=cv)
@@ -169,8 +172,8 @@ if(radio_button=='Model selection'):
 
     st.subheader("Selecting the best model")
     st.write("Out of the six models constructed employing different algorithms and vectorizers, the K-Nearest Neighbors (KNN) model with the TF-IDF vectorizer emerges as the most effective in distinguishing between fake and real news articles.")
-model=pickle.load(open(r'C:\Users\HP\Desktop\fake news\KNNTFIDF.pkl','rb'))
-tfidf=pickle.load(open(r'C:\Users\HP\Desktop\fake news\TFIDF.pkl','rb'))
+model=pickle.load(open('KNNTFIDF.pkl','rb'))
+tfidf=pickle.load(open('TFIDF.pkl','rb'))
 if(radio_button=="Prediction of Text"):
     text_button= st.text_input("Enter the Text")
     predict_button= st.button("predict")
